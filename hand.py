@@ -100,7 +100,7 @@ import numpy as np
 
 data = []
 labels = []
-number_of_classes = 4
+number_of_classes = 6
 class HandDetector():
     def __init__(self, mode=False, maxHands=2, modelComplexity=1, detectionConfidence=0.5, trackConfidence=0.5):
         self.mode = mode
@@ -114,7 +114,7 @@ class HandDetector():
         self.mpDraw = mp.solutions.drawing_utils
 
         self.hand_classifier = HandModel(400 * 400 * 3, 128, number_of_classes)  
-        self.hand_classifier.load_state_dict(torch.load("weights/HandModel-30.pth"))  
+        self.hand_classifier.load_state_dict(torch.load("weights/HandModel-50.pth"))  
         self.hand_classifier.eval()  
 
     def findHands(self, img, draw=True):
@@ -165,13 +165,13 @@ class HandDetector():
 
 
 def main():
-    cap = cv2.VideoCapture(1)  # 0 for webcam, 1 for external webcam
+    cap = cv2.VideoCapture(0)  # 0 for webcam, 1 for external webcam
     detector = HandDetector()
 
     while True:
         success, img = cap.read()
         if not success:
-            print("Impossibile leggere il frame dalla webcam.")
+            print("Impossibile leggere il frame dalla webcavoglia comunqueam.")
             break
         
         img = detector.findHands(img)
