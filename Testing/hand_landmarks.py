@@ -23,7 +23,7 @@ class HandDetector():
 
         self.hand_classifier = HandModel()
         device = torch.device('cpu') 
-        self.hand_classifier.load_state_dict(torch.load("../Training/weights/model_CSV.pth", map_location=device))  
+        self.hand_classifier.load_state_dict(torch.load("./Training/weights/model_CSV.pth", map_location=device))  
         self.hand_classifier.eval()  
 
     def findHands(self, img, draw=True):
@@ -101,7 +101,7 @@ def main():
         
         img = detector.findHands(img)
         lmList = detector.findPosition(img)
-        
+        cv2.putText(img, "MLP", (img.shape[1] - 100, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow("Image", img)
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
